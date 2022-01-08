@@ -1,5 +1,5 @@
 const celulas = [];
-let plantillaTablero = '';
+let plantillaTablero = "";
 
 for (let i = 0; i < 400; i++) {
   plantillaTablero += `
@@ -24,8 +24,8 @@ function dibujar(miEvento) {
     // Limpiamos manejadores de eventos previos
     casillero.onmouseover = null;
     casillero.onclick = null;
-    
-    switch(miEvento) {
+
+    switch (miEvento) {
       case "mouseover":
         casillero.onmouseover = plantarCelula;
         break;
@@ -46,6 +46,13 @@ function poblarTablero() {
   renderizar();
 }
 
+function limpiarTablero() {
+  for (let i = 0; i < 400; i++) {
+    celulas[i] = 0;
+  }
+  renderizar();
+}
+
 function renderizar() {
   for (let i = 0; i < 400; i++) {
     let divCelula = document.getElementById(i.toString());
@@ -61,33 +68,53 @@ function actualizar() {
   let vecindad;
   for (let i = 0; i < celulas.length; i++) {
     if (i == 0) {
-      vecindad = celulas[i+1] + celulas[i+20] + celulas[i+21];
+      vecindad = celulas[i + 1] + celulas[i + 20] + celulas[i + 21];
     } else if (i == 19) {
-      vecindad = celulas[i-1] + celulas[i+19] + celulas[i+20];
+      vecindad = celulas[i - 1] + celulas[i + 19] + celulas[i + 20];
     } else if (i == 380) {
-      vecindad = celulas[i-20] + celulas[i-19] + celulas[i+1];
+      vecindad = celulas[i - 20] + celulas[i - 19] + celulas[i + 1];
     } else if (i == 399) {
-      vecindad = celulas[i-21] + celulas[i-20] + celulas[i-1];
+      vecindad = celulas[i - 21] + celulas[i - 20] + celulas[i - 1];
     } else if (i % 20 == 0) {
-      vecindad = celulas[i-20] + celulas[i-19]
-                 + celulas[i+1]
-                 + celulas[i+20] + celulas[i+21];
+      vecindad =
+        celulas[i - 20] +
+        celulas[i - 19] +
+        celulas[i + 1] +
+        celulas[i + 20] +
+        celulas[i + 21];
     } else if ((i + 1) % 20 == 0) {
-      vecindad = celulas[i-21] + celulas[i-20]
-                 + celulas[i-1]
-                 + celulas[i+19] + celulas[i+20];
+      vecindad =
+        celulas[i - 21] +
+        celulas[i - 20] +
+        celulas[i - 1] +
+        celulas[i + 19] +
+        celulas[i + 20];
     } else if (i < 20) {
-      vecindad = celulas[i-1] + celulas[i+1]
-                 + celulas[i+19] + celulas[i+20] + celulas[i+21];
+      vecindad =
+        celulas[i - 1] +
+        celulas[i + 1] +
+        celulas[i + 19] +
+        celulas[i + 20] +
+        celulas[i + 21];
     } else if (i > 379) {
-      vecindad = celulas[i-21] + celulas[i-20] + celulas[i-19]
-                 + celulas[i-1] + celulas[i+1];
+      vecindad =
+        celulas[i - 21] +
+        celulas[i - 20] +
+        celulas[i - 19] +
+        celulas[i - 1] +
+        celulas[i + 1];
     } else {
-      vecindad = celulas[i-21] + celulas[i-20] + celulas[i-19]
-                 + celulas[i-1] + celulas[i+1]
-                 + celulas[i+19] + celulas[i+20] + celulas[i+21];
+      vecindad =
+        celulas[i - 21] +
+        celulas[i - 20] +
+        celulas[i - 19] +
+        celulas[i - 1] +
+        celulas[i + 1] +
+        celulas[i + 19] +
+        celulas[i + 20] +
+        celulas[i + 21];
     }
-    
+
     if (celulas[i] == 1 && (vecindad < 2 || vecindad > 3)) {
       celulas[i] = 0;
     } else if (celulas[i] == 0 && vecindad == 3) {
