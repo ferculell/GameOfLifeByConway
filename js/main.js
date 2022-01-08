@@ -14,7 +14,7 @@ const tablero = document.getElementsByTagName("div");
 function plantarCelula(event) {
   let i = event.target.id;
   celulas[parseInt(i)] = 1;
-  if (i != "tablero") {
+  if (i != "tablero" && i != "") {
     document.getElementById(i).classList.add("live");
   }
 }
