@@ -40,21 +40,21 @@ function dibujar(miEvento) {
 }
 
 function poblarTablero() {
-  for (let i = 0; i < 400; i++) {
+  for (let i = 0; i < celulas.length; i++) {
     celulas[i] = Math.round(Math.random());
   }
   renderizar();
 }
 
 function limpiarTablero() {
-  for (let i = 0; i < 400; i++) {
+  for (let i = 0; i < celulas.length; i++) {
     celulas[i] = 0;
   }
   renderizar();
 }
 
 function renderizar() {
-  for (let i = 0; i < 400; i++) {
+  for (let i = 0; i < celulas.length; i++) {
     let divCelula = document.getElementById(i.toString());
     if (celulas[i] == 1) {
       divCelula.classList.add("live");
