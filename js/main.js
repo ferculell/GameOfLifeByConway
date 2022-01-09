@@ -1,4 +1,5 @@
 const celulas = [];
+let densidadPoblacional = [];
 let plantillaTablero = "";
 
 for (let i = 0; i < 400; i++) {
@@ -50,6 +51,7 @@ function limpiarTablero() {
   for (let i = 0; i < celulas.length; i++) {
     celulas[i] = 0;
   }
+  densidadPoblacional = []; // Reinicia el historial de densidad poblacional
   renderizar();
 }
 
@@ -121,6 +123,12 @@ function actualizar() {
       celulas[i] = 1;
     }
   }
+
+  // Calcula la densidad poblacional de cada generación
+  let celulasVivas = celulas.reduce((acc, cur) => acc + cur, 0);
+  let porcentajeVivas = celulasVivas / celulas.length;
+  densidadPoblacional.push(porcentajeVivas);
+
   renderizar();
 }
 
@@ -132,4 +140,5 @@ function activar() {
 
 function desactivar() {
   clearInterval(vida);
+  console.log(densidadPoblacional);  // Muestra por consola las estadísticas acumuladas
 }
