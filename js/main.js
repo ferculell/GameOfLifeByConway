@@ -15,7 +15,7 @@ const tablero = document.getElementsByTagName("div");
 function plantarCelula(event) {
   let i = event.target.id;
   celulas[parseInt(i)] = 1;
-  if (i != "tablero" && i != "") {
+  if (event.target.classList.contains("casilla")) {
     document.getElementById(i).classList.add("live");
   }
 }
@@ -53,6 +53,7 @@ function limpiarTablero() {
   }
   densidadPoblacional = []; // Reinicia el historial de densidad poblacional
   renderizar();
+  graficarPoblacion();
 }
 
 function renderizar() {
@@ -63,6 +64,27 @@ function renderizar() {
     } else if (divCelula.classList.contains("live")) {
       divCelula.classList.remove("live");
     }
+  }
+}
+
+function graficarPoblacion() {
+  let grafico = '';
+  for (let i = densidadPoblacional.length - 30; i < densidadPoblacional.length; i++) {
+    if (densidadPoblacional[i] != null) {
+      grafico += `
+        <div class="barras" style="height: ${densidadPoblacional[i] * 100}%;"></div>
+      `;
+    }
+  }
+  document.getElementById("grafico").innerHTML = grafico;
+}
+
+function mostrarGrafico() {
+  let vista = document.getElementById("grafico");
+  if (vista.style.display === "none") {
+    vista.style.display = "flex";
+  } else {
+    vista.style.display = "none";
   }
 }
 
@@ -130,6 +152,7 @@ function actualizar() {
   densidadPoblacional.push(porcentajeVivas);
 
   renderizar();
+  graficarPoblacion();
 }
 
 let vida;
@@ -140,5 +163,4 @@ function activar() {
 
 function desactivar() {
   clearInterval(vida);
-  console.log(densidadPoblacional);  // Muestra por consola las estadísticas acumuladas
 }
