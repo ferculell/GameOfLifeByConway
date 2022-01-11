@@ -21,8 +21,7 @@
 .grid-item {
   background-color: #000;
   padding: 10px;
-  /* font-size: 5px;
-    text-align: center; */
+  cursor: crosshair;
 }
 
 .live {
@@ -39,8 +38,6 @@
 }
 
 body {
-  /*margin:0;
-padding:0;*/
   background: #262626;
 }
 
