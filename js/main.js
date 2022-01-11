@@ -1,4 +1,4 @@
-const celulas = [];
+let celulas = [];
 let densidadPoblacional = [];
 let plantillaTablero = "";
 
@@ -90,6 +90,7 @@ function mostrarGrafico() {
 
 function actualizar() {
   let vecindad;
+  let nuevoEstado = [];
   for (let i = 0; i < celulas.length; i++) {
     if (i == 0) {
       vecindad = celulas[i + 1] + celulas[i + 20] + celulas[i + 21];
@@ -140,11 +141,15 @@ function actualizar() {
     }
 
     if (celulas[i] == 1 && (vecindad < 2 || vecindad > 3)) {
-      celulas[i] = 0;
+      nuevoEstado[i] = 0;
     } else if (celulas[i] == 0 && vecindad == 3) {
-      celulas[i] = 1;
+      nuevoEstado[i] = 1;
+    } else {
+      nuevoEstado[i] = celulas[i];
     }
   }
+
+  celulas = nuevoEstado;
 
   // Calcula la densidad poblacional de cada generación
   let celulasVivas = celulas.reduce((acc, cur) => acc + cur, 0);
